@@ -1,5 +1,7 @@
 package gui;
 
+import print.Printer;
+import print.PrinterDummy;
 import sequence.*;
 
 import javax.swing.*;
@@ -8,6 +10,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MainFrame extends JFrame {
+
+    Sequence currentSq=new Primes();
+    Printer printer=new PrinterDummy();
+
     private JPanel mainPanel;
     private JPanel topPanel;
     private JPanel buttonPanel;
@@ -71,6 +77,20 @@ public class MainFrame extends JFrame {
                 actionSelect();
             }
         });
+        showElementsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                actionShowElements();
+            }
+        });
+    }
+
+    private void actionShowElements(){
+        //Show elements
+        TextArea tArea=new TextArea();
+        tArea.pack();
+        tArea.setText(printer.print(currentSq));
+        tArea.setVisible(true);
     }
 
     private void actionSelect(){
